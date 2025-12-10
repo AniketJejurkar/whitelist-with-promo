@@ -74,21 +74,21 @@ export default function Hero({ onOpenForm }) {
             {/* --- DARK OVERLAY FOR DEPTH --- */}
 
             {/* --- TOP YELLOW RIBBON --- */}
-            <div style={{ fontFamily: '"Fragment Mono", monospace' }} className="absolute -top-80 -right-200 lg:top-2 lg:-right-100 rotate-[35deg] lg:rotate-[15deg] bg-[#f5d415] text-black px-32 py-3 text-[14px] font-semibold tracking-wide shadow-[0_8px_20px_rgba(0,0,0,0.45)] whitespace-nowrap"
+            <div style={{ fontFamily: '"Fragment Mono", monospace' }} className="absolute -top-80 -right-200 lg:top-2 lg:-right-100 rotate-[35deg] lg:rotate-[15deg] bg-[#f5d415] text-black px-32 py-2 text-[14px] font-semibold tracking-wide shadow-[0_8px_20px_rgba(0,0,0,0.45)] whitespace-nowrap"
             >
                 Ezzstar + Spica + Your Coin + Digital Identity + Metaverse + Social + Virtual + Web3 + Ezzstar + Spica + Your Coin + Digital Identity + Metaverse + Social + Virtual + Web3 Ezzstar + Spica + Your Coin + Digital Identity + Metaverse + Social + Virtual + Web3 + Ezzstar + Spica + Your Coin + Digital Identity + Metaverse + Social + Virtual + Web3
             </div>
 
             {/* ==== MAIN CENTER CONTENT ==== */}
             <div className="flex lg:flex-row z-40 justify-around lg:col-auto flex-col-reverse items-center min-h-screen px-6">
-                <div className="flex flex-col right-13 bottom-12 lg:right-28 lg:bottom-5 relative justify-center items-center text-center px-6">
+                <div className="flex flex-col right-13 bottom-6 lg:right-28 lg:bottom-5 relative justify-center items-center text-center px-6">
                     {/* Float-left Neon Logo */}
                     <motion.img
                         src={logo}
                         initial={{ opacity: 0, scale: 0.85, y: -10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="md:block lg:w-44 w-46 opacity-90 drop-shadow-0_0_40px_rgba 255,0,255,0.35)]"
+                        className="lg:w-44 w-42 opacity-90 drop-shadow-0_0_40px_rgba 255,0,255,0.35)]"
                     />
 
                     {/* STACK EVERYTHING HERE */}
@@ -150,7 +150,7 @@ export default function Hero({ onOpenForm }) {
                 </div>
             </div>
             {/* --- CYAN RIBBON BOTTOM RIGHT --- */}
-            <div style={{ fontFamily: '"Fragment Mono", monospace' }} className="absolute z-10 -bottom-120 -right-100 rotate-[-40deg] lg:bottom-10 lg:-right-70 lg:rotate-[-20deg] bg-[#43d6ff] text-black px-32 py-3 text-[14px] font-semibold tracking-wide whitespace-nowrap shadow-[0_8px_20px_rgba(0,0,0,0.45)]">
+            <div style={{ fontFamily: '"Fragment Mono", monospace' }} className="absolute z-10 -bottom-60 -right-200 rotate-[-40deg] lg:bottom-10 lg:-right-70 lg:rotate-[-20deg] bg-[#43d6ff] text-black px-32 py-2 text-[14px] font-semibold tracking-wide whitespace-nowrap shadow-[0_8px_20px_rgba(0,0,0,0.45)]">
                 Social App + Metaverse + Ezzstar + Web3 Identity + Coin + Virtual World + Social App + Metaverse + Ezzstar + Web3 Identity + Coin + Virtual World + Social App + Metaverse + Ezzstar + Web3 Identity + Coin + Virtual World + Social App + Metaverse + Ezzstar + Web3 Identity + Coin + Virtual World +
             </div>
 
