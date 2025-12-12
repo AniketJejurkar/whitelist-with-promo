@@ -80,7 +80,7 @@ export default function Hero({ onOpenForm }) {
             </div>
 
             {/* ==== MAIN CENTER CONTENT ==== */}
-            <div className="flex lg:flex-row z-40 justify-around lg:col-auto flex-col-reverse items-center min-h-screen px-6">
+            <div className="flex lg:flex-row z-50 justify-around lg:col-auto flex-col-reverse items-center min-h-screen px-6">
                 <div className="flex flex-col right-13 bottom-6 lg:right-28 lg:bottom-5 relative justify-center items-center text-center px-6">
                     {/* Float-left Neon Logo */}
                     <motion.img
@@ -92,7 +92,7 @@ export default function Hero({ onOpenForm }) {
                     />
 
                     {/* STACK EVERYTHING HERE */}
-                    <div className="flex flex-col items-center gap-0">
+                    <div className="flex flex-col z-50 items-center gap-0">
 
                         <img src={ds} alt="" className="w-[400px] lg:w-[350px]" />
 
@@ -121,11 +121,13 @@ export default function Hero({ onOpenForm }) {
                         </a>
                         <div>
                             <p className="z-50 mt-6 text-xl" style={{ fontFamily: "'Tektur', monospace" }}>Featured On</p>
-                            <button
-                                className="px-4 magic2 cursor-pointer py-2 text-xl border z-30 border-white/15 rounded-xl bg-white/5 backdrop-blur-md text-white/90 hover:bg-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.45)] flex items-center justify-center"
-                            >
-                                <img src={iq} alt="" className="w-20"/>
-                            </button>
+                            <a className="z-50" target="_blank" href="https://iq.wiki/">
+                                <button
+                                    className="px-4 magic2 cursor-pointer py-2 text-xl border z-30 border-white/15 rounded-xl bg-white/5 backdrop-blur-md text-white/90 hover:bg-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.45)] flex items-center justify-center"
+                                >
+                                    <img src={iq} alt="" className="w-20" />
+                                </button>
+                            </a>
                         </div>
 
                     </div>
@@ -133,7 +135,7 @@ export default function Hero({ onOpenForm }) {
 
 
                 {/* ==== RIGHT COUNTDOWN BOX ==== */}
-                <div className="flex  lg:right-20 absolute top-[3%] right-[5%] lg:relative lg:-top-60 flex-col justify-center items-center">
+                <div className="flex lg:right-20 absolute top-[3%] right-[5%] lg:relative lg:-top-60 flex-col justify-center items-center">
                     <div
                         style={{ fontFamily: "'Tektur', monospace" }}
                         className="magic border border-white/15 z-30 px-8 py-3 rounded-xl flex items-center gap-2"
@@ -144,18 +146,18 @@ export default function Hero({ onOpenForm }) {
                         <span className="text-white lg:text-2xl text-sm">{time.seconds}s</span>
                     </div>
 
-                    <button style={{ fontFamily: "'Tektur', sans-serif" }} onClick={onOpenForm} className="lg:px-10 px-6 lg:text-xl text-md py-1 lg:py-2 z-40 mt-4 rounded-full text-white  tracking-wide opacity-95 hover:opacity-100 bg-gradient-to-r from-[#b04bff] via-[#c86bff] to-[#ff7bff] shadow-[0_0_40px_15px_rgba(200,80,255,0.45)] backdrop-blur-[2px]">
+                    <button style={{ fontFamily: "'Tektur', sans-serif" }} onClick={onOpenForm} className="lg:px-10  px-6 lg:text-xl text-md py-1 lg:py-2 z-40 mt-4 rounded-full text-white  tracking-wide opacity-95 hover:opacity-100 bg-gradient-to-r from-[#b04bff] via-[#c86bff] to-[#ff7bff] shadow-[0_0_40px_15px_rgba(200,80,255,0.45)] backdrop-blur-[2px]">
                         Join Whitelist
                     </button>
                 </div>
             </div>
             {/* --- CYAN RIBBON BOTTOM RIGHT --- */}
-            <div style={{ fontFamily: '"Fragment Mono", monospace' }} className="absolute z-10 -bottom-60 -right-200 rotate-[-40deg] lg:bottom-10 lg:-right-70 lg:rotate-[-20deg] bg-[#43d6ff] text-black px-32 py-2 text-[14px] font-semibold tracking-wide whitespace-nowrap shadow-[0_8px_20px_rgba(0,0,0,0.45)]">
+            <div style={{ fontFamily: '"Fragment Mono", monospace' }} className="absolute z-40 bg-[#43d6ff] -bottom-60 -right-200 rotate-[-40deg] lg:bottom-10 lg:-right-70 lg:rotate-[-20deg]  text-black px-32 py-2 text-[14px] font-semibold tracking-wide whitespace-nowrap shadow-[0_8px_20px_rgba(0,0,0,0.45)]">
                 Social App + Metaverse + Ezzstar + Web3 Identity + Coin + Virtual World + Social App + Metaverse + Ezzstar + Web3 Identity + Coin + Virtual World + Social App + Metaverse + Ezzstar + Web3 Identity + Coin + Virtual World + Social App + Metaverse + Ezzstar + Web3 Identity + Coin + Virtual World +
             </div>
 
             {/* ==== BUILDING RIGHT ARTWORK ==== */}
-            <motion.img src={building} alt="Cyber Building" className=" absolute bottom-0 -right-20 w-[460px] md:w-[600px] lg:w-[630px] opacity-90 drop-shadow-[0_0_65px_#00eaff]" initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} />
+            <motion.img src={building} alt="Cyber Building" className="z-30 absolute bottom-0 -right-20 w-[460px] md:w-[600px] lg:w-[630px] opacity-90 drop-shadow-[0_0_65px_#00eaff]" initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} />
         </div>
     );
 }
