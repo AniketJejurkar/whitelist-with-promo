@@ -10,18 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^7.1.0",
-    "@tailwindcss/vite": "^4.1.13",
+    "@fortawesome/fontawesome-free": "7.1.0",
+    "@rainbow-me/rainbowkit": "^2.2.10",
+    "@tailwindcss/vite": "4.1.13",
+    "@tanstack/react-query": "^5.90.12",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.555.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.13"
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "4.1.13",
+    "viem": "^2.12.6",
+    "wagmi": "^2.12.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
-    "@types/react": "^19.1.13",
-    "@types/react-dom": "^19.1.9",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
     "@vitejs/plugin-react": "^5.0.3",
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",

@@ -6,8 +6,7 @@ import copy from "./assets/icons/copy.png";
 import logo from "./assets/logo2.png";
 import coins from "./assets/coins.png";
 import WhitelistDialog from "./WhiteListDialog";
-
-
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 export default function Form({ onClose, onOpenWallet }) {
   // 🔹 NEW LOGIC: FORM STATE
   const [referralCode, setReferralCode] = useState("");
@@ -37,7 +36,6 @@ export default function Form({ onClose, onOpenWallet }) {
     const dummy = "user12345";
     setWalletAddress(`0x${dummy}...abcd`);
     setRefLink(`${window.location.origin}/?ref=${dummy}`);
-
   };
 
   const onCopy = async () => {
@@ -89,7 +87,6 @@ export default function Form({ onClose, onOpenWallet }) {
       style={{ fontFamily: "'Tektur', sans-serif" }}
     >
       <div className="relative flex border mx-auto border-cyan-300 w-full max-w-4xl p-[2px] bg rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.6)]">
-
         {copied && (
           <div className="fixed z-50 bottom-6 left-1/2 -translate-x-1/2 bg-white text-black px-4 py-2 rounded-lg shadow-lg text-sm animate-fadeIn">
             Copied!
@@ -132,8 +129,19 @@ export default function Form({ onClose, onOpenWallet }) {
 
             {/* RESTORED: Exact text from old code */}
             <p className="text-[13.5px] text-white/80 leading-relaxed">
-              Join the whitelist for early access to the Ezzstar ecosystem. <br />
-              ⚡ Only whitelist members will receive <span className="text-amber-300"> 10% extra SPCA bonus</span> during the <span className="text-pink-600"> presale phase </span> — plus your own referral link to invite friends and earn an additional <span className="text-teal-500"> 10% bonus in SPCA and Crypto</span>. Enjoy exclusive perks, access to the test platform, rewards, private Discord channels, and early invitations to community events
+              Join the whitelist for early access to the Ezzstar ecosystem.{" "}
+              <br />⚡ Only whitelist members will receive{" "}
+              <span className="text-amber-300"> 10% extra SPCA bonus</span>{" "}
+              during the <span className="text-pink-600"> presale phase </span>{" "}
+              — plus your own referral link to invite friends and earn an
+              additional{" "}
+              <span className="text-teal-500">
+                {" "}
+                10% bonus in SPCA and Crypto
+              </span>
+              . Enjoy exclusive perks, access to the test platform, rewards,
+              private Discord channels, and early invitations to community
+              events
             </p>
 
             <form onSubmit={handleSubmit}>
@@ -175,25 +183,31 @@ export default function Form({ onClose, onOpenWallet }) {
                   />
                 </div>
 
-                <div>
-                  <label className="text-lg font-semibold">
-                    Wallet Address<span className="text-red-400">*</span>
-                  </label>
-                  <button
-                    type="button"
-                    onClick={connectWallet}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl mt-1 hover:bg-white/10 transition text-white"
-                  >
-                    {walletAddress || "Connect Wallet"}
-                  </button>
+                <div className="flex justify-center items-center">
+                  <ConnectButton.Custom>
+                    {({ openConnectModal }) => (
+                      <button
+                        type="button" // 🔥 THIS FIXES IT
+                        onClick={openConnectModal}
+                        className="connect-btn"
+                      >
+                        Connect Wallet
+                      </button>
+                    )}
+                  </ConnectButton.Custom>
                 </div>
                 {/* NEW COUNTRY FIELD */}
                 <div>
-                  <label className="text-lg font-semibold">Country<span className="text-red-400">*</span></label>
-                  <input required value={country} onChange={(e) => setCountry(e.target.value)}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl mt-1 focus:outline-none focus:border-cyan-400 placeholder:text-white/40 text-white" />
+                  <label className="text-lg font-semibold">
+                    Country<span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    required
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl mt-1 focus:outline-none focus:border-cyan-400 placeholder:text-white/40 text-white"
+                  />
                 </div>
-
               </div>
 
               {/* RESTORED: Referral Link and Submit Layout */}
@@ -202,8 +216,14 @@ export default function Form({ onClose, onOpenWallet }) {
                   <label className="text-lg font-semibold">
                     Referral Link <span className="text-cyan-300">(0)</span>
                   </label>
-                  <div onClick={onCopy} className="flex w-[320px] rounded-xl hover:bg-black/50 cursor-pointer">
-                    <button type="button" className="flex-1 truncate bg-black/30 rounded-tr-none rounded-br-none border-r-0 border border-white/10 px-4 py-3 rounded-xl text-white/60 text-left">
+                  <div
+                    onClick={onCopy}
+                    className="flex w-[320px] rounded-xl hover:bg-black/50 cursor-pointer"
+                  >
+                    <button
+                      type="button"
+                      className="flex-1 truncate bg-black/30 rounded-tr-none rounded-br-none border-r-0 border border-white/10 px-4 py-3 rounded-xl text-white/60 text-left"
+                    >
                       {refLink || "Connect your wallet first"}
                     </button>
                     <button

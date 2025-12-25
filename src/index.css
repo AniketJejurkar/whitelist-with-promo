@@ -1,127 +1,139 @@
 @import "tailwindcss";
-button{
-    cursor: pointer;
+:root {
+  --rk-fonts-body: Inter, system-ui, sans-serif;
+}
+.connect-btn {
+  font-family: "Fragment Mono", monospace;
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: #c56bff;
+  color: white;
+  font-weight: 600;
+}
+
+button {
+  cursor: pointer;
 }
 .magic {
-    position: relative;
-    background-color: rgb(0, 0, 0);
-    border-radius: 12px;
-    overflow: hidden;
+  position: relative;
+  background-color: rgb(0, 0, 0);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 /* Rotating border */
 .magic::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    /* allow extension for glow */
-    border-radius: inherit;
-    z-index: -1;
-    background: conic-gradient(from 0deg,
-            rgba(255, 0, 0, 0) 0deg,
-            rgba(255, 0, 0, 0) 250deg,
-            rgba(255, 255, 255, 0.9) 270deg,
-            rgba(255, 0, 0, 0) 290deg,
-            rgba(255, 0, 0, 0) 360deg);
+  content: "";
+  position: absolute;
+  inset: -4px;
+  /* allow extension for glow */
+  border-radius: inherit;
+  z-index: -1;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 0, 0, 0) 0deg,
+    rgba(255, 0, 0, 0) 250deg,
+    rgba(255, 255, 255, 0.9) 270deg,
+    rgba(255, 0, 0, 0) 290deg,
+    rgba(255, 0, 0, 0) 360deg
+  );
 
-
-    animation: rotateBorder 5s linear infinite;
+  animation: rotateBorder 5s linear infinite;
 }
 
 /* Inner mask to keep only border visible */
 .magic::after {
-    content: "";
-    position: absolute;
-    inset: 2px;
-    border-radius: inherit;
-    background: black;
-    z-index: -1;
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: black;
+  z-index: -1;
 }
 
 /* Rotation animation */
 @keyframes rotateBorder {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .neon-card {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;   /* KEEP THIS — prevents neon from leaking inside */
-    z-index: 10;        /* card stays above backdrop */
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden; /* KEEP THIS — prevents neon from leaking inside */
+  z-index: 10; /* card stays above backdrop */
 }
 
 /* neon glow border */
 .neon-card::before {
-    content: "";
-    position: absolute;
-    inset: -3px;               /* slight outside expansion */
-    border-radius: inherit;
-    background: linear-gradient(135deg, #00eaff, #ff00ff);
-    filter: blur(10px);
-    z-index: -1;               /* place behind card, BUT inside neon-card stacking */
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: -3px; /* slight outside expansion */
+  border-radius: inherit;
+  background: linear-gradient(135deg, #00eaff, #ff00ff);
+  filter: blur(10px);
+  z-index: -1; /* place behind card, BUT inside neon-card stacking */
+  pointer-events: none;
 }
 
 /* actual dark inside area */
 
-
 /* neon buttons */
 .btn-blue {
-    background: linear-gradient(90deg, #00eaff, #59ccf3);
-    padding: 4px 32px;
-    border-radius: 30px;
-    color: white;
-    font-weight: 500;
-    box-shadow: 0 0 20px #00eaff66;
+  background: linear-gradient(90deg, #00eaff, #59ccf3);
+  padding: 4px 32px;
+  border-radius: 30px;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 0 20px #00eaff66;
 }
 
 .btn-purple {
-    background: linear-gradient(90deg, #f82bf8, #be53f3);
-    padding: 4px 32px;
-    border-radius: 30px;
-    color: white;
-    font-weight: 500;
-    box-shadow: 0 0 20px #ff00ff66;
+  background: linear-gradient(90deg, #f82bf8, #be53f3);
+  padding: 4px 32px;
+  border-radius: 30px;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 0 20px #ff00ff66;
 }
 
-
 .magic2 {
-    position: relative;
-    background-color: rgb(0, 0, 0);
-    border-radius: 12px;
-    overflow: hidden;
+  position: relative;
+  background-color: rgb(0, 0, 0);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 /* Rotating border */
 .magic2::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    /* allow extension for glow */
-    border-radius: inherit;
-    z-index: -1;
-    background: conic-gradient(from 0deg,
-            rgba(255, 0, 0, 0) 0deg,
-            rgba(255, 0, 0, 0) 250deg,
-            rgba(242, 181, 250, 0.9) 270deg,
-            rgba(255, 0, 0, 0) 290deg,
-            rgba(255, 0, 0, 0) 360deg);
+  content: "";
+  position: absolute;
+  inset: -4px;
+  /* allow extension for glow */
+  border-radius: inherit;
+  z-index: -1;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 0, 0, 0) 0deg,
+    rgba(255, 0, 0, 0) 250deg,
+    rgba(242, 181, 250, 0.9) 270deg,
+    rgba(255, 0, 0, 0) 290deg,
+    rgba(255, 0, 0, 0) 360deg
+  );
 
-
-    animation: rotateBorder 5s linear infinite;
+  animation: rotateBorder 5s linear infinite;
 }
 
 /* Inner mask to keep only border visible */
 .magic2::after {
-    content: "";
-    position: absolute;
-    inset: 2px;
-    border-radius: inherit;
-    background: black;
-    z-index: -1;
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: black;
+  z-index: -1;
 }
