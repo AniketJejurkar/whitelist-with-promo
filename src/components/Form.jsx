@@ -7,37 +7,42 @@ import logo from "./assets/logo2.png";
 import coins from "./assets/coins.png";
 import WhitelistDialog from "./WhiteListDialog";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount, useDisconnect } from "wagmi";
+
 export default function Form({ onClose, onOpenWallet }) {
-  // 🔹 NEW LOGIC: FORM STATE
-  const [referralCode, setReferralCode] = useState("");
+  // 🔹 FORM STATE
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [xUsername, setXUsername] = useState("");
-  const [walletAddress, setWalletAddress] = useState("");
-  const [country, setCountry] = useState(""); // NEW FIELD
-
-  // 🔹 EXISTING STATE
+  const [country, setCountry] = useState("");
+  const [referralCode, setReferralCode] = useState("");
   const [refLink, setRefLink] = useState("");
-  const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  // 🔹 READ REFERRAL FROM URL (ADD HERE ⬇️)
+  // 🔹 Wallet hooks
+  const { address, isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
+
+  // Update referral code and link automatically
+  useEffect(() => {
+    if (isConnected && address) {
+      setReferralCode(address);
+      setRefLink(`${window.location.origin}?ref=${address}`);
+    } else {
+      setReferralCode("");
+      setRefLink("");
+    }
+  }, [isConnected, address]);
+
+  // Read referral from URL (if provided)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const ref = params.get("ref");
-    if (ref) {
-      setReferralCode(ref);
-    }
+    if (ref) setReferralCode(ref);
   }, []);
 
-  // 🔹 NEW LOGIC: CONNECT WALLET
-  const connectWallet = () => {
-    onOpenWallet();
-    const dummy = "user12345";
-    setWalletAddress(`0x${dummy}...abcd`);
-    setRefLink(`${window.location.origin}/?ref=${dummy}`);
-  };
-
+  // Copy referral link
   const onCopy = async () => {
     if (!refLink) return;
     try {
@@ -45,15 +50,14 @@ export default function Form({ onClose, onOpenWallet }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (e) {
-      console.error("Copy failed");
+      console.error("Copy failed", e);
     }
   };
 
-  // 🔹 NEW LOGIC: API SUBMISSION
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!name || !email || !xUsername || !walletAddress || !country) {
+    if (!name || !email || !xUsername || !country || !referralCode) {
       alert("Please fill all required fields");
       return;
     }
@@ -66,9 +70,9 @@ export default function Form({ onClose, onOpenWallet }) {
           name,
           email,
           xUsername,
-          walletAddress,
-          country, // SEND COUNTRY
-          referralCode, // 👈 NEW
+          country,
+          walletAddress: referralCode,
+          referralCode,
         }),
       });
 
@@ -98,7 +102,6 @@ export default function Form({ onClose, onOpenWallet }) {
           style={{ backgroundImage: `url(${bg})` }}
         />
 
-        {/* RESTORED: Old Scrollable Container Styling */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -127,25 +130,23 @@ export default function Form({ onClose, onOpenWallet }) {
               SPICA <span className="text-[#ee42d4]">(SPCA)</span> Whitelist
             </h1>
 
-            {/* RESTORED: Exact text from old code */}
-            <p className="text-[13.5px] text-white/80 leading-relaxed">
+            <p className="text-[13.5px] text-white/80 leading-relaxed mt-2">
               Join the whitelist for early access to the Ezzstar ecosystem.{" "}
               <br />⚡ Only whitelist members will receive{" "}
-              <span className="text-amber-300"> 10% extra SPCA bonus</span>{" "}
-              during the <span className="text-pink-600"> presale phase </span>{" "}
-              — plus your own referral link to invite friends and earn an
+              <span className="text-amber-300">10% extra SPCA bonus</span>{" "}
+              during the <span className="text-pink-600">presale phase</span> —
+              plus your own referral link to invite friends and earn an
               additional{" "}
               <span className="text-teal-500">
-                {" "}
                 10% bonus in SPCA and Crypto
               </span>
               . Enjoy exclusive perks, access to the test platform, rewards,
               private Discord channels, and early invitations to community
-              events
+              events.
             </p>
 
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4 mt-4">
+            <form onSubmit={handleSubmit} className="mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4">
                 <div>
                   <label className="text-lg font-semibold">
                     Name<span className="text-red-400">*</span>
@@ -183,20 +184,37 @@ export default function Form({ onClose, onOpenWallet }) {
                   />
                 </div>
 
-                <div className="flex justify-center items-center">
+                <div>
                   <ConnectButton.Custom>
                     {({ openConnectModal }) => (
-                      <button
-                        type="button" // 🔥 THIS FIXES IT
-                        onClick={openConnectModal}
-                        className="connect-btn"
-                      >
-                        Connect Wallet
-                      </button>
+                      <>
+                        {isConnected ? (
+                          <div className="flex flex-col gap-2">
+                            <div className="truncate px-4 py-2 w-full bg-black/30 border border-white/10 rounded-xl text-white">
+                              {address}
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => disconnect()}
+                              className="px-4 py-2 bg-red-600 rounded-xl hover:bg-red-700 transition text-white"
+                            >
+                              Disconnect
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={openConnectModal}
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl mt-1 hover:bg-white/10 transition text-white"
+                          >
+                            Connect Wallet
+                          </button>
+                        )}
+                      </>
                     )}
                   </ConnectButton.Custom>
                 </div>
-                {/* NEW COUNTRY FIELD */}
+
                 <div>
                   <label className="text-lg font-semibold">
                     Country<span className="text-red-400">*</span>
@@ -210,12 +228,10 @@ export default function Form({ onClose, onOpenWallet }) {
                 </div>
               </div>
 
-              {/* RESTORED: Referral Link and Submit Layout */}
-              <div className="flex lg:flex-row flex-col items-center gap-4 mt-2">
+              {/* Referral Link & Submit */}
+              <div className="flex lg:flex-row flex-col items-center gap-4 mt-4">
                 <div>
-                  <label className="text-lg font-semibold">
-                    Referral Link <span className="text-cyan-300">(0)</span>
-                  </label>
+                  <label className="text-lg font-semibold">Referral Link</label>
                   <div
                     onClick={onCopy}
                     className="flex w-[320px] rounded-xl hover:bg-black/50 cursor-pointer"
@@ -235,6 +251,7 @@ export default function Form({ onClose, onOpenWallet }) {
                     </button>
                   </div>
                 </div>
+
                 <div className="flex flex-1 justify-center items-center">
                   <button
                     type="submit"
